@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+
+    <h:body class="nav-md">
+        <ui:composition template="../plantillas/plantillaUno.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <div>top tiles</div>
+                    <div class="row tile_count">
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i>Estudiantes Activos</span>
+                            <div class="count gree"><?php echo $registro_estudiantes; ?></div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i>Docentes Activos</span>
+                            <div class="count gree"><?php echo $registro_docentes; ?></div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i>Ofertas Activas</span>
+                            <div class="count green"><?php echo $registro_ofertas; ?></div>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i>Grupos Activos</span>
+                            <div class="count gree"><?php echo $registro_grupos; ?></div>
+                        </div>
+                    </div>               
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="dashboard_graph">
+
+                                <img src="../resources/images/campus-web-01.png" width="100%" height="100%" style="opacity:0.4"></img>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

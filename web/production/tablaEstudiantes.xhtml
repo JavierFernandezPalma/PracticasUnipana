@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../plantillas/plantillaUno.xhtml">
+
+            <ui:define name="content">
+                                <h:form id="demo-form" class="form-horizontal form-label-left">
+                    <p:growl id="msgs" showDetail="true" />
+                    <div class="form-group">
+                        <div class="well" style="overflow: auto">
+                            <div class="col-md-4">
+
+
+                                <p:outputLabel for="event" value="Fecha inicial:" />
+                                <p:calendar id="event" value="#{EstudiantesManagedBean.date1}">
+                                    <p:ajax event="dateSelect" listener="#{EstudiantesManagedBean.selecteddate1}" update="msgs" />
+                                </p:calendar>
+
+                                <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                                    <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                                        <h:outputText value="Event:" />
+                                        <h:outputText value="#{EstudiantesManagedBean.date1}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:panelGrid>
+                                </p:dialog>
+
+
+                                <!--fieldset>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                                <input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" value="01/01/2016 - 01/25/2016" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset-->
+
+                            </div>
+                            <div class="col-md-4">
+                                <p:outputLabel for="event2" value="Fecha final:" />
+                                <p:calendar id="event2" value="#{EstudiantesManagedBean.date2}">
+                                    <p:ajax event="dateSelect" listener="#{EstudiantesManagedBean.selecteddate2}" update="msgs" />
+                                </p:calendar>
+
+                                <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                                    <p:panelGrid id="display" columns="2" columnClasses="label,value">
+                                        <h:outputText value="Event:" />
+                                        <h:outputText value="#{EstudiantesManagedBean.date2}">
+                                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                                        </h:outputText>
+                                    </p:panelGrid>
+                                </p:dialog>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Documento</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" class="form-control" placeholder="Documento"/>
+                        </div>
+                    </div>
+
+                    <p:separator/>
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Especialidad <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <h:selectOneMenu class="form-control" id="console" value="#{EstudiantesManagedBean.selectedEspecialidades}" >
+                                <f:selectItem itemLabel="Todas" itemValue="0" />
+                                <f:selectItems value="#{EstudiantesManagedBean.listaEspecialidadesList}" var="esp" itemLabel="#{esp.descespecialidad}" itemValue="#{esp.idespecialidad}" />
+                            </h:selectOneMenu>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Programa <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <h:selectOneMenu class="form-control" id="console" value="#{EstudiantesManagedBean.selectedProgramaAcademicos}" >
+                                <f:selectItem itemLabel="Todos" itemValue="0" />
+                                <f:selectItems value="#{EstudiantesManagedBean.listaProgramaAcademicosList}" var="pro" itemLabel="#{pro.descprograma}" itemValue="#{pro.idprograma}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Jornada <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <h:selectOneMenu class="form-control" id="console" value="#{EstudiantesManagedBean.selectedJornadas}" >
+                                <f:selectItem itemLabel="Todas" itemValue="0" />
+                                <f:selectItems value="#{EstudiantesManagedBean.listaJornadasList}" var="jor" itemLabel="#{jor.descjornada}" itemValue="#{jor.idjornada}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Modalidad <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <h:selectOneMenu class="form-control" id="console" value="#{EstudiantesManagedBean.selectedModalidadEstudios}" >
+                                <f:selectItem itemLabel="Todas" itemValue="0" />
+                                <f:selectItems value="#{EstudiantesManagedBean.listaModalidadEstudiosList}" var="moda" itemLabel="#{moda.descmodalidad}" itemValue="#{moda.idmodalidad}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Semestre <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <h:selectOneMenu class="form-control" id="console" value="#{EstudiantesManagedBean.selectedSemestre}" >
+                                <f:selectItem itemLabel="Todos" itemValue="0" />
+                                <f:selectItems value="#{EstudiantesManagedBean.listaSemestreList}" var="sem" itemLabel="#{sem.descsemestre}" itemValue="#{sem.idsemestre}" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+            <button class="btn btn-primary" type="reset">Regresar</button>
+            <p:commandButton icon="ui-icon-key" value="Buscar" actionListener="#{EstudiantesManagedBean.listEstudiantes()}" ajax="true" update=":fr"/>
+            <p:commandButton icon="ui-icon-key" value="Cancelar" actionListener="#{newJSFManagedBean.limpiarLista()}" ajax="true" update=":fr"/>
+                        </div>
+                    </div>
+
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

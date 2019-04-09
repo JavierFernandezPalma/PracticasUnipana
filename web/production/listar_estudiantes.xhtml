@@ -1,0 +1,349 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <script type="text/javascript">    
+    PrimeFaces.locales['de'] = {
+        closeText: 'Schließen',
+        prevText: 'Zurück',
+        nextText: 'Weiter',
+        monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        monthNamesShort: ['Jan', 'Feb', 'März', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+        dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+        dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+        dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+        weekHeader: 'Woche',
+        FirstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
+        timeOnlyTitle: 'Nur Zeit',
+        timeText: 'Zeit',
+        hourText: 'Stunde',
+        minuteText: 'Minute',
+        secondText: 'Sekunde',
+        currentText: 'Aktuelles Datum',
+        ampm: false,
+        month: 'Monat',
+        week: 'Woche',
+        day: 'Tag',
+        allDayText: 'Ganzer Tag'
+    };
+</script>
+    
+    <style type="text/css">
+    .value {
+        font-weight: bold;
+    }
+</style>
+    
+    <h:body>
+
+        <ui:composition template="../plantillas/plantillaUno.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true"/>  <!-- Muestra los mensajes de error-->
+                <p:messages id="mensaje" autoUpdate="true" showDetail="true" showSummary="true"/> 
+
+                <div>TODO write content</div>
+                <!-- page content -->
+                <div class="page-title">
+                    <div class="title_left">
+                        <ol class="breadcrumb">
+                            <li><a href="index"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                            <li class="active">Crear masivo Estudiantes</li>
+                        </ol>
+                    </div>
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for..."/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <p:growl id="msgs" showDetail="true" />
+                <div class="x_panel">
+
+                    <br />
+
+                    <div class="x_title">
+                        <div class="title_right">
+                        </div>
+                        <h2>Form Design <small>different form elements</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <br />
+
+
+
+                    <div class="x_content">
+                        <br />
+                        <h:form id="demo-form" class="form-horizontal form-label-left">
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fechas"><span class="required"></span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="overflow: auto">
+                                    <div class="col-md-6">
+                                        Selector de intervalo de fechas *
+
+                                        <fieldset>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <div class="input-prepend input-group">
+                                                        <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                                        <input type="text" style="width: 200px" name="fechas" id="reservation" class="form-control"  value="01/01/2016 - 01/25/2016" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <p:separator  class="ln_solid"/>
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Documento</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <p:inputText class="input100" type="text"  value="#{usuariosMB.TEstudiantes.identificacion}" label="documento" id="docu" placeholder="Documento"/>
+                                    </div>
+                                </div>
+                                
+                                <p:separator  class="ln_solid"/>
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="especialidad">Especialidad <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h:selectOneMenu class="form-control" id="especialidad" value="#{estudiantesManagedBean.selectedEspecialidades}">
+                                            <f:selectItem itemLabel="Todas" itemValue="0" />
+                                            <f:selectItems value="#{estudiantesManagedBean.listaEspecialidadesList}" var="esp" itemLabel="#{esp.descespecialidad}" itemValue="#{esp.idespecialidad}" />
+                                            <f:converter converterId="javax.faces.Integer" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programa">Programa <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h:selectOneMenu class="form-control" id="programa" value="#{estudiantesManagedBean.selectedProgramaAcademicos}" >
+                                            <f:selectItem itemLabel="Todos" itemValue="0" />
+                                            <f:selectItems value="#{estudiantesManagedBean.listaProgramaAcademicosList}" var="pro" itemLabel="#{pro.descprograma}" itemValue="#{pro.idprograma}" />
+                                            <f:converter converterId="javax.faces.Integer" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jornada">Jornada <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h:selectOneMenu class="form-control" id="jornada" value="#{estudiantesManagedBean.selectedJornadas}" >
+                                            <f:selectItem itemLabel="Todas" itemValue="0" />
+                                            <f:selectItems value="#{estudiantesManagedBean.listaJornadasList}" var="jor" itemLabel="#{jor.descjornada}" itemValue="#{jor.idjornada}" />
+                                            <f:converter converterId="javax.faces.Integer" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="modalidad">Modalidad <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h:selectOneMenu class="form-control" id="modalidad" value="#{estudiantesManagedBean.selectedModalidadEstudios}" >
+                                            <f:selectItem itemLabel="Todas" itemValue="0" />
+                                            <f:selectItems value="#{estudiantesManagedBean.listaModalidadEstudiosList}" var="moda" itemLabel="#{moda.descmodalidad}" itemValue="#{moda.idmodalidad}" />
+                                            <f:converter converterId="javax.faces.Integer" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="semestre">Semestre <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <h:selectOneMenu class="form-control" id="semestre" value="#{estudiantesManagedBean.selectedSemestre}" >
+                                            <f:selectItem itemLabel="Todos" itemValue="0" />
+                                            <f:selectItems value="#{estudiantesManagedBean.listaSemestreList}" var="sem" itemLabel="#{sem.descsemestre}" itemValue="#{sem.idsemestre}" />
+                                            <f:converter converterId="javax.faces.Integer" />
+                                        </h:selectOneMenu>
+                                    </div>
+                                </div>
+
+                            <p:separator  class="ln_solid"/>
+                            <div class="form-group">
+                                <p:commandButton id="buscar" value="Buscar" actionListener="#{estudiantesManagedBean.listEstudiantes()}" update=":fr"/>
+                                <p:commandButton id="cancelar" value="Cancelar" actionListener="#{estudiantesManagedBean.limpiarLista()}" update=":fr"/>
+                            </div>
+                        </h:form>
+                    </div>
+
+                    <h:form style=" padding:30px 0 0 0" id="fr">
+
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                    <div class="x_title">
+                        <div class="title_right">
+                        </div>
+                        <h2>Form Design <small>different form elements</small></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Settings 1</a>
+                                    </li>
+                                    <li><a href="#">Settings 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a class="close-link"><i class="fa fa-close"></i></a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                                <div class="x_content">
+                                    <p class="text-muted font-13 m-b-30">
+                                        The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built.
+                                    </p>
+                                    <p:dataTable id="estudiantes" class="table table-striped table-bordered" var="estudiantes" value="#{estudiantesManagedBean.listaEstudiantesList}"
+                                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                                                 paginator="true" rows="15"  style="margin-bottom:20px" rendered="#{(estudiantesManagedBean.listaEstudiantesList.size() > 0 eq true)}"
+                                                 emptyMessage="No hay Usuarios que se encuentren con criterios de Datos">
+
+                                        <f:facet name="header">
+                                            Lista de Estudiantes Encontrados
+                                        </f:facet>
+                                        <f:facet name="{Exporters}">
+
+                                            <h:commandLink>
+                                                <h:graphicImage url="resources/images/Excel.png" width="24"/>
+                                                <p:dataExporter type="xls" target="tbl" fileName="usuarios" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <h:graphicImage url="resources/images/pdf.png" width="24"/>
+                                                <p:dataExporter type="pdf" target="tbl" fileName="usuarios"/>
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <h:graphicImage url="resources/images/csv.png" width="24"/>
+                                                <p:dataExporter type="csv" target="tbl" fileName="usuarios" />
+                                            </h:commandLink>
+
+                                            <h:commandLink>
+                                                <h:graphicImage url="resources/images/XML.png" width="24"/>
+                                                <p:dataExporter type="xml" target="tbl" fileName="usuarios" />
+                                            </h:commandLink>
+                                        </f:facet>
+                                        <tbody>
+                                            <p:column filterBy="#{estudiantes.identificacion}" headerText="Documento" footerText="in" filterMatchMode="in">
+                                                <f:facet name="filter">
+                                                    <p:selectCheckboxMenu label="Identificación" panelStyle="width:125px" scrollHeight="150">
+                                                           <f:selectItems value="#{estudiantes.identificacion}" />
+                                                    </p:selectCheckboxMenu>
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.identificacion}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombres" />
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.nombres}" />
+                                            </p:column>
+
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Apellidos" />
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.apellidos}" />
+                                            </p:column>
+
+                                            <p:column filterBy="#{estudiantes.descespecialidad}">                              
+                                                <f:facet name="header">
+                                                    <h:outputText value="Especialidad" />
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.descespecialidad}"/>
+                                            </p:column>
+
+                                            <p:column filterBy="#{estudiantes.descprograma}">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Programa" />
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.descprograma}" />
+                                            </p:column>
+
+                                            <p:column filterBy="#{estudiantes.descjornada}">                              
+                                                <f:facet name="header">
+                                                    <h:outputText value="Jornada" />
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.descjornada}"/>
+                                            </p:column>
+
+                                            <p:column filterBy="#{estudiantes.descmodalidad}">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Modalidad" />
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.descmodalidad}" /> 
+                                            </p:column>
+
+                                            <p:column filterBy="#{estudiantes.descsemestre}">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Semestre" />
+                                                </f:facet>
+                                                <h:outputText value="#{estudiantes.descsemestre}" />
+                                            </p:column>
+                                        </tbody>
+                                        <f:facet name="footer">
+                                            Estudiantes Encontrados #{estudiantesManagedBean.listaEstudiantesList.size()} 
+                                        </f:facet>
+
+                                    </p:dataTable>
+                                </div>
+                            </div>
+                        </div>
+
+                    </h:form> 
+
+
+                </div>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
+
+
+
+
+

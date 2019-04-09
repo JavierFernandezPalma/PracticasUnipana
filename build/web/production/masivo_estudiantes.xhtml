@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+   
+    <!--Validar solo numeros -->
+
+    <h:body class="nav-md">
+        <ui:composition template="../plantillas/plantillaUno.xhtml">
+            <ui:define name="content">
+                <p:growl id="msj" showDetail="true"/> <!-- Muestra los mensajes de error-->
+                <p:messages id="mensaje" autoUpdate="true" showDetail="true" showSummary="true"/>
+                <h:form>
+                    <div>TODO write content</div>
+                    <!-- page content -->
+                    <div class="page-title">
+                        <div class="title_left">
+                            <ol class="breadcrumb">
+                                <li><a href="index"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                                <li class="active">Crear masivo Estudiantes</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2><small>Subida masiva de estudiantes</small></h2>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <form class="form-horizontal form-label-left" novalidate="" name="solicitar_oferta" id="solicitar_oferta" method="post" enctype="multipart/form-data">
+                                        <div class="item form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="estudiante_clave" >Subir archivo Excel<span class="required">:</span>
+                                            </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="file" id="archivo" name="archivo" required="required" class="form-control col-md-7 col-xs-12" placeholder="Seleccione archivo" onchange="return fileValidation()"/>
+                                            </div>
+                                        </div>
+                                        <div class="item form-group">
+
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <a href="plantillas/masivo estudiantes.xlsx"><b>->Descargar plantilla para solicitudes</b></a>
+                                            </div>
+                                        </div>
+                                        <div class="ln_solid"></div>
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-md-offset-5">
+                                                <input name="valor" type="hidden" value="#{masivoController.readExcelFile(solicitar_oferta)}"/>
+                                                <input name="f_soli2" type="hidden" value=""/>
+                                                <button id="soli_interno" type="submit" class="btn btn-success" role="button" name="valor" align="center" ajax="false" update=":msj,:mensaje">Solicitar</button>
+                                            </div>
+                                        </div>
+                                        <br></br><br></br>
+                                    </form>
+                                    <div id="loading_n" style="display:none;" align="center"> <img src="images/cargando.gif"/></div>
+                                    <div id="response_masivo"></div>
+                                    <br></br><br></br><br></br><br></br><br></br><br></br> <br></br><br> </br><br></br> <br></br><br> </br><br></br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- validator -->
+                    <script src="../resources/vendors/validator/validator.js"></script>
+                    <script src="../resources/vendors/validator/validator_1.js"></script>
+                    
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</html>

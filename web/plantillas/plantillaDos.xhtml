@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+   <h:head>
+        <title></title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="resources/css/reset.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen"/>
+        <link rel="stylesheet" href="resources/css/grid.css" type="text/css" media="screen"/>
+        <script src="js/jquery-1.6.3.min.js" type="text/javascript"></script>
+        <script src="js/cufon-yui.js" type="text/javascript"></script>
+        <script src="js/cufon-replace.js" type="text/javascript"></script>
+        <script src="js/Mate_400.font.js" type="text/javascript"></script>
+        <script src="js/FF-cash.js" type="text/javascript"></script>
+        <script src="js/tms-0.3.js" type="text/javascript"></script>
+        <script src="js/tms_presets.js" type="text/javascript"></script>
+        <script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+        <!--[if lt IE 7]-->
+        <div style=' clear: both; text-align:center; position: relative;'>
+            <a href="http://app.saludcapital.gov.co/comprobadordederechos/Consulta.aspx">
+                <img src="resources/images/banner.png" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." style="color: #ffff33"/>
+            </a>
+        </div>
+        <!--[endif]-->
+        <!--[if lt IE 9]-->
+        <script type="text/javascript" src="js/html5.js"></script>
+        <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen"/>
+        <!--[endif]-->
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                  <h:form>
+            <div class="extra">
+                <div class="main">
+                    <header>
+                        <div class="wrapper p4">
+                            <h1><a href="index.xhtml">SISTEMA DE INFORMACION</a></h1>
+                            <ul class="list-services">
+                                <li><a href="#">Ayuda</a></li>
+                            </ul>
+                        </div>
+                        <nav>
+                            <ul class="menu">
+                                
+                                <li><a href="faces/login.xhtml">Inicio</a></li>
+                                <li><a href="faces/componente.xhtml">Componente</a></li>
+                                <li></li>
+                                <li><a href="faces/equipo.xhtml">Equipo</a></li>
+                              
+                                <li class="last"><a href="faces/componente.xhtml">Puntos de Registro</a></li>
+                                
+                            </ul>
+                        </nav>
+                        <div class="wrapper"></div>
+                    </header>
+                </div>
+            </div>
+            
+        </h:form>
+        
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">
+              
+                </ui:insert>
+        </div>
+
+        <div id="bottom" style="width: 90%; margin:auto;min-width: 600px;max-width: 2000px">
+            <ui:insert name="bottom">
+                  
+                <!--==============================footer=================================-->
+                <footer>
+                    <div class="main">
+                        <div class="inner">
+                            <p></p>
+                            <p><a class="link" rel="nofollow" href="#">Desarrollado por Javier Fernandez</a></p>
+                            <p> Correo: totojavi81@hotmail.com</p>
+                            <!-- {%FOOTER_LINK} -->
+                        </div>
+                    </div>
+                </footer>
+                <script type="text/javascript"> Cufon.now();</script>
+                
+                <script type="text/javascript">
+                    $(window).load(function () {
+                        $('.slider')._TMS({
+                            duration: 800,
+                            easing: 'easeOutQuad',
+                            preset: 'simpleFade',
+                            slideshow: 7000,
+                            banners: false,
+                            pauseOnHover: true,
+                            pagination: false,
+                            nextBu: '.next',
+                            prevBu: '.prev'
+                        });
+                    });
+                </script>
+            </ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

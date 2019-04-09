@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="AplicacionPracticasPU" transaction-type="JTA">
+    <jta-data-source>jdbc/practicasPool</jta-data-source>
+    <class>Entityes.TActividadEconomica</class>
+    <class>Entityes.TAplicarVacante</class>
+    <class>Entityes.TAsignarGrupo</class>
+    <class>Entityes.TAuditoria</class>
+    <class>Entityes.TCiudad</class>
+    <class>Entityes.TClaves</class>
+    <class>Entityes.TDepartamento</class>
+    <class>Entityes.TDocentes</class>
+    <class>Entityes.TEmpresas</class>
+    <class>Entityes.TEntregar</class>
+    <class>Entityes.TEntregas</class>
+    <class>Entityes.TEspecialidad</class>
+    <class>Entityes.TEstados</class>
+    <class>Entityes.TEstudiantes</class>
+    <class>Entityes.TFacultad</class>
+    <class>Entityes.TGrupo</class>
+    <class>Entityes.TJornada</class>
+    <class>Entityes.TMails</class>
+    <class>Entityes.TMateria</class>
+    <class>Entityes.TModalidadEstudio</class>
+    <class>Entityes.TModalidadPractica</class>
+    <class>Entityes.TOfertaEstudiante</class>
+    <class>Entityes.TPerfilUsuarios</class>
+    <class>Entityes.TPracticas</class>
+    <class>Entityes.TProgramaAcademico</class>
+    <class>Entityes.TSectorEconomico</class>
+    <class>Entityes.TSemestre</class>
+    <class>Entityes.TTamanoEmpresa</class>
+    <class>Entityes.TTelefonos</class>
+    <class>Entityes.TTipDocumento</class>
+    <class>Entityes.TTipoTelefonos</class>
+    <class>Entityes.TUsuarios</class>
+    <class>Entityes.TVacante</class>
+    <class>View.VEstudiantes</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+</persistence>
