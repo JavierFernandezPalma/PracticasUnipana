@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    
+        <!-- Bootstrap -->
+    <link href="../resources/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Font Awesome -->
+    <link href="../resources/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <!-- NProgress -->
+    <link href="../resources/vendors/nprogress/nprogress.css" rel="stylesheet"/>
+    
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet"/>
+    <h:body>
+
+        <ui:composition template="./../plantillas/plantillaUno.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="growl" showDetail="true" sticky="true" autoUpdate="true"/>  <!-- Muestra los mensajes de error-->
+                <p:messages id="mensaje" autoUpdate="true" showDetail="true" showSummary="true"/> 
+
+
+
+                <p:growl id="msgs" showDetail="true" />
+
+                    <!-- page content -->
+
+                            <div class="page-title">
+                   <div class="title_left">
+                        <ol class="breadcrumb">
+                            <li><a href="index"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                            <li class="active">Crear masivo Estudiantes</li>
+                        </ol>
+                    </div>
+
+                                <div class="title_right">
+                                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search for..."/>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button">Go!</button>
+                                                </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="x_panel">
+                                        <div class="x_title">
+                                            <h2>Form validation <small>sub title</small></h2>
+                                            <ul class="nav navbar-right panel_toolbox">
+                                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                </li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                    <ul class="dropdown-menu" role="menu">
+                                                        <li><a href="#">Settings 1</a>
+                                                        </li>
+                                                        <li><a href="#">Settings 2</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                </li>
+                                            </ul>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="x_content">
+
+                                            <h:form class="form-horizontal form-label-left">
+
+                                                <p>For alternative validation library <code>parsleyJS</code> check out in the <a href="form.html">form page</a>
+                                                </p>
+                                                <span class="section">Personal Info</span>
+
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="f_solicitud">Fecha de Solicitud:<span class="required"></span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input id="f_soli" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" value="" name="f_soli"  type="text"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombre">Nombres <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <p:inputText id="nombres" class="form-control col-md-7 col-xs-12" value="#{estudiantesManagedBean.VEstudiantes.nombres}" label="nombre" placeholder="Ingrese Nombres" required="required" type="text"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="apellido">Apellidos <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <p:inputText id="apellidos" class="form-control col-md-7 col-xs-12" value="#{estudiantesManagedBean.VEstudiantes.apellidos}" label="apellido" placeholder="Ingrese Apellidos" required="required" type="text"/>
+                                                    </div>
+                                                </div>
+
+                                                <p:separator  class="ln_solid"/>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipodocumento">Tipo documento <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <h:selectOneMenu class="form-control" id="tipodocumento" >
+                                                            <f:selectItems value="#{tipoDocumentoManagedBean.listaTipoDocumento}" var="tip" itemLabel="#{tip.descTipDocumento}" itemValue="#{tip.idTipDocuemnto}" />
+                                                            <f:converter converterId="javax.faces.Integer" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="documento">Documento <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <p:inputText id="documento" class="form-control col-md-7 col-xs-12" value="#{estudiantesManagedBean.VEstudiantes.identificacion}" label="documento" placeholder="Ingrese Documento" required="required" type="text"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_expe" >Fecha de expedición<span class="required">*:</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" class="form-control has-feedback-left" id="single_cal3" name="fecha_expe" placeholder="Ingres Fecha Expedición" aria-describedby="inputSuccess2Status3"/>
+                                                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+
+                                                    </div>
+                                                </div>
+
+                                                <p:separator  class="ln_solid"/>
+
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_naci" >Fecha Nacimientó<span class="required">*:</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" class="form-control has-feedback-left" id="single_cal4" name="fecha_naci" placeholder="Ingres Fecha Nacimientó" aria-describedby="inputSuccess2Status4"/>
+                                                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="email" id="email" name="email" required="required" class="form-control col-md-7 col-xs-12"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Confirm Email <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="email" id="email2" name="confirm_email" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12"/>
+                                                    </div>
+                                                </div>
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tel_estudiante">Telefono <span class="required">*:</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="tel_estudiante" name="tel_estudiante" required="required" class="form-control col-md-7 col-xs-12" onKeyPress="return soloNumeros(event)" maxlength="13" placeholder="Ingrese Telefono Conctacto" autocomplete="off"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="item form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="movil_estudiante">Celular<span class="required">*:</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <input type="text" id="movil_estudiante" name="movil_estudiante" required="required" class="form-control col-md-7 col-xs-12" onKeyPress="return soloNumeros(event)" maxlength="13" placeholder="Ingrese Celular Conctacto" autocomplete="off"/>
+                                                    </div>
+                                                </div>
+                                                <p:separator  class="ln_solid"/>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="especialidad">Especialidad <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <h:selectOneMenu class="form-control" id="especialidad" value="#{estudiantesManagedBean.selectedEspecialidades}">
+                                                            <f:selectItem itemLabel="Todas" itemValue="0" />
+                                                            <f:selectItems value="#{estudiantesManagedBean.listaEspecialidadesList}" var="esp" itemLabel="#{esp.descespecialidad}" itemValue="#{esp.idespecialidad}" />
+                                                            <f:converter converterId="javax.faces.Integer" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="programa">Programa <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <h:selectOneMenu class="form-control" id="programa" value="#{estudiantesManagedBean.selectedProgramaAcademicos}" >
+                                                            <f:selectItem itemLabel="Todos" itemValue="0" />
+                                                            <f:selectItems value="#{estudiantesManagedBean.listaProgramaAcademicosList}" var="pro" itemLabel="#{pro.descprograma}" itemValue="#{pro.idprograma}" />
+                                                            <f:converter converterId="javax.faces.Integer" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jornada">Jornada <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <h:selectOneMenu class="form-control" id="jornada" value="#{estudiantesManagedBean.selectedJornadas}" >
+                                                            <f:selectItem itemLabel="Todas" itemValue="0" />
+                                                            <f:selectItems value="#{estudiantesManagedBean.listaJornadasList}" var="jor" itemLabel="#{jor.descjornada}" itemValue="#{jor.idjornada}" />
+                                                            <f:converter converterId="javax.faces.Integer" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="modalidad">Modalidad <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <h:selectOneMenu class="form-control" id="modalidad" value="#{estudiantesManagedBean.selectedModalidadEstudios}" >
+                                                            <f:selectItem itemLabel="Todas" itemValue="0" />
+                                                            <f:selectItems value="#{estudiantesManagedBean.listaModalidadEstudiosList}" var="moda" itemLabel="#{moda.descmodalidad}" itemValue="#{moda.idmodalidad}" />
+                                                            <f:converter converterId="javax.faces.Integer" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="semestre">Semestre <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <h:selectOneMenu class="form-control" id="semestre" value="#{estudiantesManagedBean.selectedSemestre}" >
+                                                            <f:selectItem itemLabel="Todos" itemValue="0" />
+                                                            <f:selectItems value="#{estudiantesManagedBean.listaSemestreList}" var="sem" itemLabel="#{sem.descsemestre}" itemValue="#{sem.idsemestre}" />
+                                                            <f:converter converterId="javax.faces.Integer" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+
+                                                <p:separator  class="ln_solid"/>
+
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="estado">Estado <span class="required">*</span>
+                                                    </label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <h:selectOneMenu class="form-control" id="estado" value="#{estudiantesManagedBean.selectedSemestre}" >
+                                                            <f:selectItem itemLabel="Activo" itemValue="0" />
+                                                            <f:selectItems value="#{estudiantesManagedBean.listaSemestreList}" var="sem" itemLabel="#{sem.descsemestre}" itemValue="#{sem.idsemestre}" />
+                                                            <f:converter converterId="javax.faces.Integer" />
+                                                        </h:selectOneMenu>
+                                                    </div>
+                                                </div>
+                                                <div class="ln_solid"></div>
+                                                <div class="form-group">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <button type="submit" class="btn btn-primary">Cancel</button>
+                                                        <button id="send" type="submit" class="btn btn-success">Submit</button>
+                                                    </div>
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <!-- /page content -->
+                    
+                    
+                    
+
+            </ui:define>
+
+        </ui:composition>
+        
+        
+            <!-- jQuery -->
+    <script src="../resources/vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../resources/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../resources/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../resources/vendors/nprogress/nprogress.js"></script>
+    <!-- validator -->
+    <script src="../resources/vendors/validator/validator.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+    </h:body>
+</html>

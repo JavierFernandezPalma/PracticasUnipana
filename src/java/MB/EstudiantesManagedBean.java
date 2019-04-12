@@ -14,7 +14,6 @@ import Entityes.TModalidadEstudio;
 import Entityes.TProgramaAcademico;
 import Entityes.TSemestre;
 import Session.TEstudiantesFacadeLocal;
-import Session.VEstudiantesFacadeLocal;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -43,7 +42,7 @@ import org.primefaces.event.SelectEvent;
  */
 @ManagedBean
 @ViewScoped
-public class EstudiantesManagedBean  implements Serializable {
+public class EstudiantesManagedBean implements Serializable {
 
     private DataSource ds;
     
@@ -54,15 +53,17 @@ public class EstudiantesManagedBean  implements Serializable {
     private List<TSemestre> listaSemestreList = null;
     private List<VEstudiantes> listaEstudiantesList;
     private List<VEstudiantes> filtroEstudiantes = null;
+
     
     private int selectedEspecialidades;
     private int selectedProgramaAcademicos;
     private int selectedJornadas;
     private int selectedModalidadEstudios;
     private int selectedSemestre;
+    private int selectedTipoDocumento;
     private Date selectedDate1;
     private Date selectedDate2;
-
+    
 
     private TEspecialidad especialidad = null;
     private TProgramaAcademico programaAcademico = null;
@@ -70,6 +71,7 @@ public class EstudiantesManagedBean  implements Serializable {
     private TJornada jornada = null;
     private TModalidadEstudio modalidadEstudio = null;
     private TSemestre semestre = null;
+    
     
     private Date date1;
     private Date date2;
@@ -144,6 +146,14 @@ public class EstudiantesManagedBean  implements Serializable {
     public void setSelecteddate2(Date selecteddate2) {
         this.selectedDate2 = selecteddate2;
     }
+    
+    public int getSelectedTipoDocumento() {
+        return selectedTipoDocumento;
+    }
+
+    public void setSelectedTipoDocumento(int selectedTipoDocumento) {
+        this.selectedTipoDocumento = selectedTipoDocumento;
+    }
 
     public List<TEspecialidad> getListaEspecialidadesList() {
         return listaEspecialidadesList;
@@ -193,6 +203,9 @@ public class EstudiantesManagedBean  implements Serializable {
     public void setListaEstudiantesList(List<VEstudiantes> listaEstudiantesList) {
         this.listaEstudiantesList = listaEstudiantesList;
     }
+
+
+    
 
     public List<VEstudiantes> getFiltroEstudiantes() {
         return filtroEstudiantes;
@@ -291,6 +304,7 @@ public class EstudiantesManagedBean  implements Serializable {
     public void setDocumento(String documento) {
         this.documento = documento;
     }
+    
     
     public EstudiantesManagedBean() throws SQLException, Exception {
         ListEspecialidades();
