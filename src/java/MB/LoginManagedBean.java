@@ -9,11 +9,11 @@ import Entityes.TUsuarios;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import Session.TUsuariosFacadeLocal;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 
 
@@ -24,8 +24,10 @@ import javax.annotation.PostConstruct;
  *
  * @author javi
  */
-@ManagedBean
-@ViewScoped
+
+@Named(value = "loginManagedBean")
+@RequestScoped
+
 public class LoginManagedBean implements Serializable {
 
     @EJB
@@ -73,25 +75,21 @@ public class LoginManagedBean implements Serializable {
     
         public String iniciarSesion() {
 
-        TUsuarios log;
+        TUsuarios log = login;
         String redireccion = null;
-
-        try {
-            log = loginFacadeLocal.iniciarSesion(login);
-
-            if (log != null) {
-                redireccion = "production/principal";
-            } else {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "El usuario no existe y/o clave errada."));
-            }
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo realizar el login."));
-        }
+redireccion = "production/principal";
+//        try {
+//            log = loginFacadeLocal.iniciarSesion(login);
+//
+//            if (log != null) {
+//                redireccion = "production/principal";
+//            } else {
+//                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "El usuario no existe y/o clave errada."));
+//            }
+//        } catch (Exception e) {
+//            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "No se pudo realizar el login."));
+//        }
         return redireccion;
     }
         
-    public void prueba(){
-        String a = login.getUsuario();
-    }
-
 }

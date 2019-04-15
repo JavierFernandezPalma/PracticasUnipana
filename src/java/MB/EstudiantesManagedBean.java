@@ -6,6 +6,7 @@
 package MB;
 
 import Entityes.TEspecialidad;
+import Entityes.TEstados;
 import Entityes.TEstudiantes;
 import View.VEstudiantes;
 import Entityes.TFacultad;
@@ -13,6 +14,7 @@ import Entityes.TJornada;
 import Entityes.TModalidadEstudio;
 import Entityes.TProgramaAcademico;
 import Entityes.TSemestre;
+import Entityes.TTipDocumento;
 import Session.TEstudiantesFacadeLocal;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -45,6 +47,7 @@ import org.primefaces.event.SelectEvent;
 public class EstudiantesManagedBean implements Serializable {
 
     private DataSource ds;
+    java.util.Date fechaActual = new Date();
     
     private List<TEspecialidad> listaEspecialidadesList = null;
     private List<TProgramaAcademico> listaProgramaAcademicosList = null;
@@ -53,6 +56,8 @@ public class EstudiantesManagedBean implements Serializable {
     private List<TSemestre> listaSemestreList = null;
     private List<VEstudiantes> listaEstudiantesList;
     private List<VEstudiantes> filtroEstudiantes = null;
+    private List<TTipDocumento> listaTipoDocumento = null;
+    private List<TEstados> listaesEstados = null;
 
     
     private int selectedEspecialidades;
@@ -61,6 +66,7 @@ public class EstudiantesManagedBean implements Serializable {
     private int selectedModalidadEstudios;
     private int selectedSemestre;
     private int selectedTipoDocumento;
+    private int selectedEstados;
     private Date selectedDate1;
     private Date selectedDate2;
     
@@ -71,13 +77,14 @@ public class EstudiantesManagedBean implements Serializable {
     private TJornada jornada = null;
     private TModalidadEstudio modalidadEstudio = null;
     private TSemestre semestre = null;
-    
+    private TTipDocumento tipoDocumento = null;
+    private TEstados estados = null;
     
     private Date date1;
     private Date date2;
     
     private String documento = null;
-    private VEstudiantes vEstudiantes;
+    private VEstudiantes vEstudiantes = null;
     
     @EJB
     TEstudiantesFacadeLocal estudiantesFacadeLocal;
@@ -87,6 +94,7 @@ public class EstudiantesManagedBean implements Serializable {
      @PostConstruct
     public void init(){
         estudiantes = new TEstudiantes();
+        vEstudiantes = new VEstudiantes();
 
     }
     
@@ -155,6 +163,14 @@ public class EstudiantesManagedBean implements Serializable {
         this.selectedTipoDocumento = selectedTipoDocumento;
     }
 
+    public int getSelectedEstados() {
+        return selectedEstados;
+    }
+
+    public void setSelectedEstados(int selectedEstados) {
+        this.selectedEstados = selectedEstados;
+    }
+
     public List<TEspecialidad> getListaEspecialidadesList() {
         return listaEspecialidadesList;
     }
@@ -204,9 +220,22 @@ public class EstudiantesManagedBean implements Serializable {
         this.listaEstudiantesList = listaEstudiantesList;
     }
 
+    public List<TTipDocumento> getListaTipoDocumento() {
+        return listaTipoDocumento;
+    }
 
+    public void setListaTipoDocumento(List<TTipDocumento> listaTipoDocumento) {
+        this.listaTipoDocumento = listaTipoDocumento;
+    }
+
+    public List<TEstados> getListaesEstados() {
+        return listaesEstados;
+    }
+
+    public void setListaesEstados(List<TEstados> listaesEstados) {
+        this.listaesEstados = listaesEstados;
+    }
     
-
     public List<VEstudiantes> getFiltroEstudiantes() {
         return filtroEstudiantes;
     }
@@ -304,19 +333,33 @@ public class EstudiantesManagedBean implements Serializable {
     public void setDocumento(String documento) {
         this.documento = documento;
     }
+
+    public TTipDocumento getTipoDocumento() {
+        return tipoDocumento;
+    }
+
+    public void setTipoDocumento(TTipDocumento tipoDocumento) {
+        this.tipoDocumento = tipoDocumento;
+    }
+
+    public Date getFechaActual() {
+        return fechaActual;
+    }
+
+    public void setFechaActual(Date fechaActual) {
+        this.fechaActual = fechaActual;
+    }
+
+    public TEstados getEstados() {
+        return estados;
+    }
+
+    public void setEstados(TEstados estados) {
+        this.estados = estados;
+    }
     
     
     public EstudiantesManagedBean() throws SQLException, Exception {
-        ListEspecialidades();
-        ListProgramaAcademicos();
-        ListJornada();
-        ListModalidadEstudios();
-        ListSemestres();
-        estudiantes = new TEstudiantes();
-    }
-    
-        private List<TEspecialidad>  ListEspecialidades()  throws SQLException {
-        
         
         try {
             Context ctx = new InitialContext();
@@ -324,23 +367,35 @@ public class EstudiantesManagedBean implements Serializable {
 
         } catch (NamingException e) {
         }
-
+        
+        ListEspecialidades();
+        ListProgramaAcademicos();
+        ListJornada();
+        ListModalidadEstudios();
+        ListSemestres();
+        ListTipoDocumento();
+        ListEstados();
+        estudiantes = new TEstudiantes();
+    }
+    
+        private List<TEspecialidad>  ListEspecialidades()  throws SQLException {  
+        
         String sql = "SELECT * FROM practicas.t_especialidad ORDER BY Desc_especialidad ASC";
-        String sql2 = "ORDER BY Desc_especialidad ASC";
 
-        Connection con = ds.getConnection();
-        ResultSet r = con.prepareStatement(sql).executeQuery();
-        ArrayList lista = new ArrayList();
-        while (r.next()) {
-            int Id_especialidad = r.getInt("Id_especialidad");
-            int Id_programa = r.getInt("Id_programa");
-            String Desc_especialidad = r.getNString("Desc_especialidad");
-
-            especialidad = new TEspecialidad(Id_especialidad, Id_programa, Desc_especialidad);
-            lista.add(especialidad);
-
+        ArrayList lista;
+        try (Connection con = ds.getConnection()) {
+            ResultSet r = con.prepareStatement(sql).executeQuery();
+            lista = new ArrayList();
+            while (r.next()) {
+                int Id_especialidad = r.getInt("Id_especialidad");
+                int Id_programa = r.getInt("Id_programa");
+                String Desc_especialidad = r.getString("Desc_especialidad");
+                
+                especialidad = new TEspecialidad(Id_especialidad, Id_programa, Desc_especialidad);
+                lista.add(especialidad);
+                
+            }
         }
-        con.close();
         listaEspecialidadesList = lista;
        
         return listaEspecialidadesList;
@@ -349,22 +404,14 @@ public class EstudiantesManagedBean implements Serializable {
 
     private List<TJornada> ListJornada()   throws SQLException {
         
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("jdbc/practicasPool");
-
-        } catch (NamingException e) {
-        }
-
         String sql = "SELECT * FROM practicas.t_jornada ORDER BY Desc_jornada ASC";
-        String sql2 = "ORDER BY Desc_especialidad ASC";
 
         Connection con = ds.getConnection();
         ResultSet r = con.prepareStatement(sql).executeQuery();
         ArrayList lista = new ArrayList();
         while (r.next()) {
             int Id_jornada = r.getInt("Id_jornada");
-            String Desc_jornada = r.getNString("Desc_jornada");
+            String Desc_jornada = r.getString("Desc_jornada");
 
             jornada = new TJornada(Id_jornada, Desc_jornada);
             lista.add(jornada);
@@ -381,15 +428,7 @@ public class EstudiantesManagedBean implements Serializable {
     
     private List<TProgramaAcademico> ListProgramaAcademicos() throws Exception {
 
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("jdbc/practicasPool");
-
-        } catch (NamingException e) {
-        }
-
         String sql = "SELECT * FROM practicas.t_programa_academico ORDER BY Desc_programa ASC";
-        String sql2 = "ORDER BY Desc_especialidad ASC";
 
         Connection con = ds.getConnection();
         ResultSet r = con.prepareStatement(sql).executeQuery();
@@ -398,7 +437,7 @@ public class EstudiantesManagedBean implements Serializable {
         while (r.next()) {
             int Id_programa = r.getInt("Id_programa");
             int Id_facultad = r.getInt("Id_facultad");
-            String Desc_programa = r.getNString("Desc_programa");
+            String Desc_programa = r.getString("Desc_programa");
             
             facultad = new TFacultad(Id_facultad);
             programaAcademico = new TProgramaAcademico(Id_programa, facultad, Desc_programa);
@@ -422,22 +461,14 @@ public class EstudiantesManagedBean implements Serializable {
         
      private List<TModalidadEstudio> ListModalidadEstudios()  throws Exception {
 
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("jdbc/practicasPool");
-
-        } catch (NamingException e) {
-        }
-
         String sql = "SELECT * FROM practicas.t_modalidad_estudio ORDER BY Desc_modalidad ASC";
-        String sql2 = "ORDER BY Desc_especialidad ASC";
 
         Connection con = ds.getConnection();
         ResultSet r = con.prepareStatement(sql).executeQuery();
         ArrayList lista = new ArrayList();
         while (r.next()) {
             int Id_modalidad = r.getInt("Id_modalidad");
-            String Desc_modalidad = r.getNString("Desc_modalidad");
+            String Desc_modalidad = r.getString("Desc_modalidad");
 
              modalidadEstudio = new TModalidadEstudio(Id_modalidad, Desc_modalidad);
             lista.add( modalidadEstudio);
@@ -453,22 +484,15 @@ public class EstudiantesManagedBean implements Serializable {
      
          private List<TSemestre> ListSemestres()  throws Exception {
 
-        try {
-            Context ctx = new InitialContext();
-            ds = (DataSource) ctx.lookup("jdbc/practicasPool");
-
-        } catch (NamingException e) {
-        }
 
         String sql = "SELECT * FROM practicas.t_semestre ORDER BY Id_semestre ASC";
-        String sql2 = "ORDER BY Desc_especialidad ASC";
 
         Connection con = ds.getConnection();
         ResultSet r = con.prepareStatement(sql).executeQuery();
         ArrayList lista = new ArrayList();
         while (r.next()) {
             int Id_semestre = r.getInt("Id_semestre");
-            String Desc_semestre = r.getNString("Desc_semestre");
+            String Desc_semestre = r.getString("Desc_semestre");
 
              semestre = new TSemestre(Id_semestre, Desc_semestre);
             lista.add(semestre);
@@ -478,6 +502,54 @@ public class EstudiantesManagedBean implements Serializable {
         listaSemestreList = lista;
         
         return listaSemestreList;
+    
+    }
+         
+         
+             private List<TTipDocumento> ListTipoDocumento()  throws Exception {
+
+
+        String sql = "SELECT * FROM practicas.t_tip_documento ORDER BY Desc_TipDocumento ASC";
+
+        Connection con = ds.getConnection();
+        ResultSet r = con.prepareStatement(sql).executeQuery();
+        ArrayList lista = new ArrayList();
+        while (r.next()) {
+            int Id_TipDocuemnto = r.getInt("Id_TipDocuemnto");
+            String Desc_TipDocumento = r.getString("Desc_TipDocumento");
+
+             tipoDocumento = new TTipDocumento(Id_TipDocuemnto, Desc_TipDocumento);
+            lista.add(tipoDocumento);
+
+        }
+        con.close();
+        listaTipoDocumento = lista;
+        
+        return listaTipoDocumento;
+    
+    }
+             
+             
+                 private List<TEstados> ListEstados()  throws Exception {
+
+
+        String sql = "SELECT * FROM practicas.t_estados WHERE Id_estado IN (1,2,3) ORDER BY Desc_estado ASC";
+
+        Connection con = ds.getConnection();
+        ResultSet r = con.prepareStatement(sql).executeQuery();
+        ArrayList lista = new ArrayList();
+        while (r.next()) {
+            int Id_estado = r.getInt("Id_estado");
+            String Desc_estado = r.getString("Desc_estado");
+
+             estados = new TEstados(Id_estado, Desc_estado);
+            lista.add(estados);
+
+        }
+        con.close();
+        listaesEstados = lista;
+        
+        return listaesEstados;
     
     }
          
@@ -500,6 +572,11 @@ public class EstudiantesManagedBean implements Serializable {
         }
 
         return listaEstudiantesList;
+    }
+    
+    public void prueba(){
+        
+        VEstudiantes a = vEstudiantes;
     }
 
 }

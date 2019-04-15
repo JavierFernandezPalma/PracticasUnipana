@@ -33,4 +33,6 @@ public interface TEstudiantesFacadeLocal {
 
     public List<VEstudiantes> findAll_Estudiantes();
     
+    
+    
 }

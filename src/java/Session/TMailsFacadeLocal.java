@@ -30,4 +30,6 @@ public interface TMailsFacadeLocal {
 
     int count();
     
+    //public void crearEmail(TMails tMails);
+    
 }

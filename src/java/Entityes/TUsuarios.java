@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "t_usuarios")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TUsuarios.findAll", query = "SELECT t FROM TUsuarios t")
+    @NamedQuery(name = "TUsuarios.login", query = "SELECT t.tUsuariosPK.identificacion FROM TUsuarios t WHERE t.usuario = :usuario AND t.password = :password")
+    , @NamedQuery(name = "TUsuarios.findAll", query = "SELECT t FROM TUsuarios t")
     , @NamedQuery(name = "TUsuarios.findByIdentificacion", query = "SELECT t FROM TUsuarios t WHERE t.tUsuariosPK.identificacion = :identificacion")
     , @NamedQuery(name = "TUsuarios.findByIddocumento", query = "SELECT t FROM TUsuarios t WHERE t.iddocumento = :iddocumento")
     , @NamedQuery(name = "TUsuarios.findByIdperfil", query = "SELECT t FROM TUsuarios t WHERE t.tUsuariosPK.idperfil = :idperfil")
@@ -339,6 +340,10 @@ public class TUsuarios implements Serializable {
     @Override
     public String toString() {
         return "Entityes.TUsuarios[ tUsuariosPK=" + tUsuariosPK + " ]";
+    }
+
+    public void getTUsuariosPK(TUsuariosPK tUsuariosPK) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
